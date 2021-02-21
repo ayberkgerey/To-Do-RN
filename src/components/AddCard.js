@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 20,
     width: '90%',
-    height: '10%',
+    height: '50%',
     borderColor: '#ffc100',
     borderWidth: 2,
     flexDirection: 'row',

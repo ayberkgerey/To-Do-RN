@@ -1,6 +1,6 @@
 import React from 'react';
-import MainScreen from './src/screens/MainScreen';
+import ToDoScreen from './src/screens/ToDoScreen';
 
 export default function App() {
-  return <MainScreen />;
+  return <ToDoScreen />;
 }
