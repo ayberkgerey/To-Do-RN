@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {TodoContext} from '../provider/TodoProvider';
 
-export default function TodoCard() {
-
+export default function TodoCard(props) {
   const [num, setNum] = useState();
   const [text, setText] = useState();
 
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
-      <Text style={styles.numberStyle}>#1</Text>
+        <Text style={styles.numberStyle}>#{props.id}</Text>
       </View>
-      <Text style={styles.textStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+      <Text style={styles.textStyle}>{props.text}</Text>
     </View>
   );
 }
@@ -21,24 +21,24 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: 4,
     borderColor: '#ffc100',
-    borderRadius: 14
+    borderRadius: 14,
   },
   numberStyle: {
-      color: 'black',
-      fontSize: 20,
-      fontWeight: 'bold',
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   textStyle: {
     color: '#ffc100',
     fontSize: 17,
     fontWeight: 'bold',
-    margin: 10
+    margin: 10,
   },
   labelContainer: {
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
     flexDirection: 'row',
-    backgroundColor: '#ffc100'
+    backgroundColor: '#ffc100',
   },
 });

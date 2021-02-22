@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -6,12 +6,33 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {TodoContext} from '../provider/TodoProvider';
 
 export default function AddCard() {
+  const toDo = useContext(TodoContext);
+  const [temporaryToDo, setTemporaryToDo] = useState();
+
   return (
     <View style={styles.container}>
-      <TextInput multiline={true} style={styles.inputContainer} />
-      <TouchableOpacity style={styles.buttonLayout}>
+      <TextInput
+        onChangeText={(text) => setTemporaryToDo(text)}
+        multiline={true}
+        style={styles.inputContainer}
+      />
+      <TouchableOpacity
+        onPress={() => {
+          if (temporaryToDo !== null) {
+            toDo.setTodo((prevState) => [
+              ...prevState,
+              {
+                id: toDo.todo.length,
+                text: temporaryToDo,
+              },
+            ]);
+            setTemporaryToDo();
+          }
+        }}
+        style={styles.buttonLayout}>
         <Text style={styles.buttonStyle}>></Text>
       </TouchableOpacity>
     </View>
@@ -51,6 +72,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffc100',
     borderBottomRightRadius: 19,
     borderTopRightRadius: 19,
-
   },
 });
