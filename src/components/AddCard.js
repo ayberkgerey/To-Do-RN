@@ -25,7 +25,7 @@ export default function AddCard() {
             toDo.setTodo((prevState) => [
               ...prevState,
               {
-                id: toDo.todo.length,
+                id: toDo.todo.length + 1,
                 text: temporaryToDo,
               },
             ]);
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 20,
     width: '90%',
-    height: '50%',
+    height: '30%',
     borderColor: '#ffc100',
     borderWidth: 2,
     flexDirection: 'row',

@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flex: 1,
     width: '100%',
-    height: '50%',
+    height: '30%',
     bottom: 20,
   },
   todoContainer: {
     height: '70%',
     width: '90%',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 20,
   },
 });

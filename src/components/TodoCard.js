@@ -1,18 +1,37 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState, useContext} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {TodoContext} from '../provider/TodoProvider';
 
 export default function TodoCard(props) {
-  const [num, setNum] = useState();
-  const [text, setText] = useState();
+  const [showTodo, setShowTodo] = useState(true);
+  const [showDelete, setShowDelete] = useState(false);
+  const toDo = useContext(TodoContext);
+
+  const removeIt = () => {
+    const filter = toDo.todo.filter((item) => item.text !== props.text);
+    toDo.setTodo(filter);
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.labelContainer}>
-        <Text style={styles.numberStyle}>#{props.id}</Text>
-      </View>
+    <TouchableOpacity
+      style={styles.container}
+      onLongPress={() => {
+        setShowTodo(!showTodo);
+        setShowDelete(!showDelete);
+      }}>
+      {showTodo ? (
+        <View style={styles.labelContainer}>
+          <Text style={styles.numberStyle}>#{props.id}</Text>
+        </View>
+      ) : null}
+      {showDelete ? (
+        <TouchableOpacity onPress={removeIt} style={styles.deleteContainer}>
+          <Text style={styles.deleteText}>DELETE</Text>
+        </TouchableOpacity>
+      ) : null}
+
       <Text style={styles.textStyle}>{props.text}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -22,6 +41,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: '#ffc100',
     borderRadius: 14,
+    marginTop: 15,
   },
   numberStyle: {
     color: 'black',
@@ -40,5 +60,19 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     backgroundColor: '#ffc100',
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  deleteContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    backgroundColor: 'red',
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  deleteText: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
